@@ -57,6 +57,7 @@ def read_pdf(update, context):
         document=open('handwritten.pdf', "rb"),
         caption=("Here is your result file")
         
+        
     )
     os.remove('handwritten.pdf')
     
