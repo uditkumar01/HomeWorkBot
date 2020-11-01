@@ -4,13 +4,10 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 import telegram
 
-from utils import get_pdf
-
 import os
 
 import time
 
-from hand import get_pdf
 
 
 # Enable logging
@@ -48,7 +45,8 @@ def read_pdf(update, context):
     txt_file = context.bot.get_file(update.message.document.file_id)
     txt_file.download(custom_path="text/assignment1.txt")
     update.message.reply_text("This process may take time depending on your your file size...")
-    get_pdf('assignment1.txt')
+    from hand import handwriter
+    handwriter()
     time.sleep(2)
     update.message.reply_text("Your file is almost ready.")
     message = update.effective_message
@@ -56,8 +54,6 @@ def read_pdf(update, context):
     message.reply_document(
         document=open('handwritten.pdf', "rb"),
         caption=("Here is your result file")
-        
-        
     )
     os.remove('handwritten.pdf')
     

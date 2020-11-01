@@ -1,4 +1,5 @@
 from fpdf import FPDF
+import os
 
 
 class PDF(FPDF):
@@ -14,9 +15,9 @@ class PDF(FPDF):
     #     # Line break
     #     self.ln(4)
 
-    def chapter_body(self, name):
+    def chapter_body(self):
         # Read text file
-        with open(name, 'rb') as fh:
+        with open('text/assignment1.txt', 'rb') as fh:
             txt = fh.read().decode('latin-1')
         # Times 12
         self.set_font('khand', '', 12)
@@ -30,16 +31,18 @@ class PDF(FPDF):
         # self.set_font('khand', 12)
         self.cell(0, 5, '(end of excerpt)')
 
-    def print_chapter(self, num, title, name):
+    def print_chapter(self):
         self.add_page()
         # self.chapter_title(num, title)
-        self.chapter_body(name)
+        self.chapter_body()
 
-pdf = PDF()
-# pdf.set_title(title)
-pdf.add_font('khand', '', 'khand.ttf',uni=True)
-# pdf.add_font
-pdf.set_author('UK')
-pdf.print_chapter(1, 'A RUNAWAY REEF', 'text1.txt')
-# pdf.print_chapter(2, 'THE PROS AND CONS', '20k_c2.txt')
-pdf.output('tuto3.pdf', 'F')
+def handwriter():
+
+    pdf = PDF()
+    # pdf.set_title(title)
+    pdf.add_font('khand', '', 'khand.ttf',uni=True)
+    # pdf.add_font
+    # pdf.set_author('UK')
+    pdf.print_chapter()
+    # pdf.print_chapter(2, 'THE PROS AND CONS', '20k_c2.txt')
+    pdf.output('handwritten.pdf', 'F')
