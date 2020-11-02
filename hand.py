@@ -63,8 +63,8 @@ def begin_writing():
     im_list = [Image.open(os.path.join(os.path.join(dir_path,'img121'),f'page{i}.png')) for i in range(1,total_pages+1)]
     img1.save('./handwritten.pdf', "PDF", resolution=200.0, save_all=True, append_images=im_list)
 
-    for i in range(total_pages+1):
-        os.remove(os.path.join(os.path.join(dir_path,'img121'),f'page{i}.png'))
+    # for i in range(total_pages+1):
+    #     os.remove(os.path.join(os.path.join(dir_path,'img121'),f'page{i}.png'))
     # os.remove('./handwritten.pdf')
     #image_width
 dir_path = os.path.dirname(os.path.realpath(__file__))
