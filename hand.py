@@ -51,6 +51,22 @@ def write(txt,num):
     # draw_multiple_line_text(image, text2, font, text_color, 400)
     
 
+def begin_writing_text(txt):
+    '''
+    Testing draw_multiple_line_text
+    '''
+    
+    write(txt,0)
+    print(total_pages)
+    img1 = Image.open('page0.png')
+    im_list = [Image.open('page{}.png'.format(i)) for i in range(1,total_pages+1)]
+    img1.save('./handwritten.pdf', "PDF", resolution=200.0, save_all=True, append_images=im_list)
+
+    for i in range(total_pages+1):
+        os.remove('page{}.png'.format(i))
+    # os.remove('./handwritten.pdf')
+    #image_width
+
 def begin_writing():
     '''
     Testing draw_multiple_line_text
@@ -68,5 +84,4 @@ def begin_writing():
     # os.remove('./handwritten.pdf')
     #image_width
 
-begin_writing()
     

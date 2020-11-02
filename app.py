@@ -38,7 +38,26 @@ def help_command(update, context):
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    if len(update.message.text) < 10:
+        update.message.reply_text("message is too short for conversion...")
+    else:
+        from hand import begin_writing_text
+        begin_writing_text(update.message.text)
+        update.message.reply_text("Your file is almost ready.")
+        message = update.effective_message
+        message.chat.send_action(telegram.ChatAction.UPLOAD_DOCUMENT)
+        message.reply_document(
+            document=open('handwritten.pdf', "rb"),
+            caption=("Here is your result file"),
+        )
+    
+        os.remove('handwritten.pdf')
+    
+
+def convertmessage(update, context):
+    """Echo the user message."""
+    update.message.reply_text("Now, please send your txt msg.")
+    
 
 def read_pdf(update, context):
     # update.message.reply_text("File" + str(update.message.document.file_id))
@@ -47,7 +66,7 @@ def read_pdf(update, context):
     update.message.reply_text("This process may take time depending on your your file size...")
     from hand import begin_writing
     begin_writing()
-    time.sleep(2)
+    
     update.message.reply_text("Your file is almost ready.")
     message = update.effective_message
     message.chat.send_action(telegram.ChatAction.UPLOAD_DOCUMENT)
@@ -74,6 +93,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("convert", convert))
     dp.add_handler(CommandHandler("help", help_command))
+    dp.add_handler(CommandHandler("convertmsg", convertmessage))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
