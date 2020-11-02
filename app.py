@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 def start(update, context):
     """Send a message when the command /start is issued."""
     
-    update.message.reply_text('Hi, this bot can help you in your homework.\nTo begin with it type "\convert"')
+    update.message.reply_text('Hi, this bot can help you in your homework.\nTo begin with it type /convert')
 
 def convert(update, context):
     """Send a message when the command /start is issued."""
@@ -45,16 +45,17 @@ def read_pdf(update, context):
     txt_file = context.bot.get_file(update.message.document.file_id)
     txt_file.download(custom_path="text/assignment1.txt")
     update.message.reply_text("This process may take time depending on your your file size...")
-    from hand import handwriter
-    handwriter()
+    from hand import begin_writing
+    begin_writing()
     time.sleep(2)
     update.message.reply_text("Your file is almost ready.")
     message = update.effective_message
     message.chat.send_action(telegram.ChatAction.UPLOAD_DOCUMENT)
     message.reply_document(
         document=open('handwritten.pdf', "rb"),
-        caption=("Here is your result file")
+        caption=("Here is your result file"),
     )
+    
     os.remove('handwritten.pdf')
     
     
