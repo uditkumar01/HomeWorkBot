@@ -9,6 +9,10 @@ def draw_multiple_line_text(image, text, font, text_color, text_start_height,num
     text = text.replace('“','"')
     text = text.replace('”','"')
     text = text.replace('’',"'")
+    text = text.replace(',',",")
+    text = text.replace("”","\"")
+    text = text.replace("“","\"")
+    text = text.replace("’","'")
     
     draw = ImageDraw.Draw(image)
     image_width, image_height = image.size
@@ -44,7 +48,6 @@ def write(txt,num):
     image = Image.new('RGB', (600, 800), color = (197,189,186))
     fontsize = 18  # starting font size
     font = ImageFont.truetype("khand.ttf", fontsize)
-    
 
     text_color = (0,0,150)
     text_start_height = 0
