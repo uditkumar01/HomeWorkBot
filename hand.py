@@ -7,7 +7,9 @@ import os
 
 def draw_multiple_line_text(image, text, font, text_color, text_start_height,num):
 
-    text = text.replace('“','"').replace('”','"').replace('’',"'")
+    text = text.replace('“','"')
+    text = text.replace('”','"')
+    text = text.replace('’',"'")
     
     draw = ImageDraw.Draw(image)
     image_width, image_height = image.size
