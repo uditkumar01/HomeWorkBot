@@ -4,7 +4,6 @@ import os
 
 
 
-
 def draw_multiple_line_text(image, text, font, text_color, text_start_height,num):
 
     text = text.replace('“','"')
