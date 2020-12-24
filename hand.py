@@ -6,14 +6,18 @@ import os
 
 def draw_multiple_line_text(image, text, font, text_color, text_start_height,num):
 
-    text = text.replace('“','"')
-    text = text.replace('”','"')
-    text = text.replace('’',"'")
-    text = text.replace(',',",")
-    text = text.replace("”","\"")
-    text = text.replace("“","\"")
-    text = text.replace("’","'")
-    
+#     text = text.replace('“','"')
+#     text = text.replace('”','"')
+#     text = text.replace('’',"'")
+#     text = text.replace(',',",")
+#     text = text.replace("”","\"")
+#     text = text.replace("“","\"")
+#     text = text.replace("’","'")
+    all_chars = set(list(text))
+    my_chars_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', ':', ';', ',', "'", '"', '(', '!', '?', ')', '+', '-', '*', '/', '=', ' ', '\n']
+    for achar in all_chars:
+        if achar not in my_chars_list:
+            text = text.replace(achar,'')
     draw = ImageDraw.Draw(image)
     image_width, image_height = image.size
     y_text = text_start_height
